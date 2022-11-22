@@ -1,31 +1,28 @@
-<link rel = "stylesheet" href="style.css">
-
-<table>
-    <tr>
-        <th>id</th>
-        <th>№ корпуса</th>
-        <th>№ комнаты</th>
-        <th>Количество мест</th>
-        <th>Цена</th>
-    </tr>
-
 <?php
+
 require('dbconnect.php');
 
-$result = $conn->query('SELECT * FROM `Room`');
+$sql = "SELECT * FROM Room";
 
-for ($data = []; $row = mysqli_fetch_assoc($result); $data[] = $row);
-$result = '';
-foreach ($data as $elem){
-    $result .='<tr> ';
-    $result .= '<th> ' .$elem['id'] . ' </th>';
-    $result .= '<th> ' .$elem['id_building'] . ' </th>';
-    $result .= '<th> ' .$elem['Room_number'] . ' </th>';
-    $result .= '<th> ' .$elem['Number_of_seats'] . ' </th>';
-    $result .= '<th> ' .$elem['Price'] . ' </th>';
-    $result .=' </tr>';
+if($result = $conn->query($sql))
+{
+
+    echo "<table><tr> <th>id</th> <th>№ корпуса</th> <th>№ комнаты</th> <th>Количество мест</th> <th>Цена</th> </tr>";
+    foreach($result as $row){
+        echo "<tr>";
+        echo "<td>" . $row["id"] . "</td>";
+        echo "<td>" . $row["id_building"] . "</td>";
+        echo "<td>" . $row["Room_number"] . "</td>";
+        echo "<td>" . $row["Number_of_seats"] . "</td>";
+        echo "<td>" . $row["Price"] . "</td>";
+
+        echo "</tr>";
+    }
+    echo "</table>";
+} else
+{
+    echo "Ошибка: " . $conn->error;
 }
-echo $result;
-?>
-</table>
+
+
 
