@@ -34,18 +34,23 @@
             } else echo "Ошибка: " . $conn->error;
             ?>
 
+            <input type="text" name="id_guest" list="guest"/>
+            <p><input type="submit" value="Создать бронирование"></p>
+
+
             <?php
             $sql = "SELECT * FROM Guest";
-            echo "<label for='id5'>ФИО:</label>";
-            echo "<select name='id_guest' id='id5'>";
+            echo ' <datalist id="guest">';
             if($result = $conn->query($sql))
             {
                 foreach($result as $row)
                     echo "<option value='" . $row["id"] . "'>" . $row["Full_name"] . "</option>";
-                echo "</select>";
+                  echo "</select>";
             } else echo "Ошибка: " . $conn->error;
+            '</datalist>';
             ?>
-            <p><input type="submit" value="Создать бронирование"></p>
+
+
         </form>
     </div>
 </section>

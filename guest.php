@@ -4,10 +4,10 @@ require('auth.php');
 require('components/header.php');
 
 if ($_SESSION['username']) {
-    require('components/guest_del.php');
+   // require('components/guest_del.php');
 
-    if ($_POST['guestdel']){
-        $guestdel = $_POST['guestdel'];
+    if ($_GET['id']){
+        $guestdel = $_GET['id'];
         $result = $conn->query("SELECT * FROM Guest WHERE id='$guestdel'");
         if ($row = $result->fetch()){
             // $conn->query("DELETE FROM Guest WHERE Guest.id='$guestdel'");
@@ -29,11 +29,13 @@ if ($_SESSION['username']) {
     $sql = "SELECT * FROM Guest";
     if($result = $conn->query($sql))
     {
-        echo "<table><a><tr> <th>Код гостя</th> <th>ФИО гостя</th></tr>";
+        echo "<table><a><tr> <th>Код гостя</th> <th>ФИО гостя</th><th>Действие</th></tr>";
         foreach($result as $row){
             echo "<tr>";
             echo "<td>" . $row["id"] . "</td>";
             echo "<td>" . $row["Full_name"] . "</td>";
+            $level = $row["id"];
+            echo "<td><form action='guest.php?id=$level' method='post'> <input type='submit' value='Удалить'></form></td>";
             echo "</tr>";
         }
         echo "</a></table>";
