@@ -2,6 +2,8 @@
 
 use Aws\S3\S3Client;
 
+
+
 class S3FileUploader implements FileUploader
 {
     private S3Client $s3client;
@@ -16,9 +18,10 @@ class S3FileUploader implements FileUploader
 
     public function store($file, $filename): \ArrayAccess
     {
+
         return $this->s3client->putObject([
             'Bucket' =>  $this->s3config->getBucket(),
-            'Key' => $this->s3config->getKey() . '-' . $filename,
+            'Key' => $this->s3config->getKey() . '/' . $filename,
             'Body' => $file]);
     }
 
@@ -26,9 +29,17 @@ class S3FileUploader implements FileUploader
     {
         $filename = explode('/', $url);
         $filename = $filename[count($filename) - 1];
+
         return $this->s3client->deleteObject([
             'Bucket' => $this->s3config->getBucket(),
             'Key' => $this->s3config->getKey() . '/' . $filename,
         ]);
+
+ //       aws --endpoint-url=https://storage.yandexcloud.net/ \
+//  s3api head-object \
+ // --bucket <bucket_name> \
+ // --key <object_key> \
+ // --version-id <version_ID>
+
     }
 }
