@@ -1,15 +1,14 @@
 <?php
 
 use Dotenv\Dotenv;
-use Framework\Request;
-use Framework\Router;
-use Framework\Application;
-//use Framework\Container;
+use Framework\Container;
 
+session_start(["use_strict_mode" => true]);
+
+date_default_timezone_set('Asia/Yekaterinburg');
 if ( file_exists(dirname(__FILE__).'/vendor/autoload.php') ) {
     require_once dirname(__FILE__).'/vendor/autoload.php';
 }
-
 if (file_exists(".env"))
 {
     $dotenv = Dotenv::createImmutable(__DIR__);
@@ -20,14 +19,11 @@ if (file_exists(".env"))
 else {
     echo "Ошибка загрузки ENV<br>";
 }
+Container::getApp()->run();
 
-Application::init();
 
-$request = new Request();
-
-echo (new Router($request))->getContent();
-//Container::getApp()->run();
 exit();
+
 
 require('dbconnect.php');
 

@@ -14,9 +14,15 @@ class Container
         return new Application(self::getRouter());
     }
 
+    public static function getAuth(): Auth
+    {
+        echo ('создан объект Auth');
+        return new Auth(self::getRequest());
+    }
+
     public static function getRouter(): Router
     {
-        return new Router(self::getRequest());
+        return new Router(self::getRequest(), self::getAuth());
     }
 
 
@@ -62,4 +68,8 @@ class Container
     {
         return new \LocalFileUploader();
     }
+//    public static function getDbConnection(): \DbConnection
+//    {
+//        return new \DbConnection();
+//    }
 }
