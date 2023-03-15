@@ -1,14 +1,20 @@
 {
     "require": {
-        "vlucas/phpdotenv": "^5.5",
-        "aws/aws-sdk-php": "^3.258.8"
+        "vlucas/phpdotenv": "^5.4",
+        "aws/aws-sdk-php": "^3.261",
+        "ext-pdo": "*"
     },
     "autoload": {
         "psr-4": {
-            "": "src"
-        }
+            "App\\": "app",
+            "Framework\\": "framework"
+        },
+        "files": [
+            "app/routes.php"
+        ]
     },
     "require-dev": {
         "phpunit/phpunit": "9"
     }
 }
+
