@@ -2,8 +2,6 @@
 
 use Aws\S3\S3Client;
 
-
-
 class Container
 {
     public static function getS3Client(): S3Client

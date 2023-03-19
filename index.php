@@ -13,7 +13,7 @@ if (file_exists(".env"))
 {
     $dotenv = Dotenv::createImmutable(__DIR__);
     $dotenv->load(); //все параметры окружения помещаются в массив $_ENV
-    echo "Окружение загружено<p>";
+    //echo "Окружение загружено<p>";
     // var_dump($_ENV);
 }
 else {
@@ -22,7 +22,7 @@ else {
 Container::getApp()->run();
 
 
-exit();
+die();
 
 
 require('dbconnect.php');
